@@ -8,9 +8,9 @@ const projects=[
         githubUrl:''
     }, {
         id:2,
-        title:'Todo App',
-        to:'page/css-generator/index.html',
-        image:'assets/images/generator.jpg',
+        title:'Counter App',
+        to:'page/Counter/index.html',
+        image:'assets/images/counter.jpg',
         githubUrl:''
     }, {
         id:3,
