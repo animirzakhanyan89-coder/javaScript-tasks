@@ -35,3 +35,7 @@ counterEl.ondblclick=function (e){
     count=0
     counterEl.innerHTML=count
 }
+$('#refresh-btn').onclick=function (e){
+    count=0
+    counterEl.innerHTML=count
+}

@@ -2,9 +2,9 @@ const $=s=>document.querySelector(s)
 const projects=[
     {
         id:1,
-        title:'Css Generator',
-        to:'page/css-generator/index.html',
-        image:'assets/images/generator.jpg',
+        title:'Students filter',
+        to:'page/Barev/index.html',
+        image:'assets/images/student.jpeg',
         githubUrl:''
     }, {
         id:2,
