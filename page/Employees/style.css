@@ -1,0 +1,21 @@
+
+:root{
+    --soft-bg: #f8fafc;
+}
+body{ background: var(--soft-bg); }
+.navbar-brand b{ letter-spacing:.3px }
+.kpi-card .value{ font-size:1.4rem; font-weight:700 }
+.kpi-card .diff.up{ color:#198754 } /* green */
+.kpi-card .diff.down{ color:#dc3545 } /* red */
+.filter-chip{ gap:.5rem }
+.table thead th{ user-select:none; cursor:pointer; white-space:nowrap }
+.table tbody tr:hover{ background:#fffef2 }
+.badge-skill{ background:#eef2ff; color:#1f3a93; border:1px solid #dfe6ff }
+.sticky-toolbar{
+    position: sticky; top: .5rem; z-index: 1030;
+    background: #ffffffea; backdrop-filter: blur(4px);
+    border: 1px solid #eef2f7; border-radius: .75rem;
+}
+.form-select, .form-control{ border-radius:.6rem }
+.modal .badge{ font-size:.85rem }
+.empty-state{ color:#6c757d }

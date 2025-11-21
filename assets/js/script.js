@@ -20,8 +20,8 @@ const projects=[
         githubUrl:''
     },{
         id:4,
-        title:'Nation',
-        to:'page/css-generator/index.html',
+        title:'Employees Dashboard',
+        to:'page/Employees/index.html',
         image:'assets/images/generator.jpg',
         githubUrl:''
     },{
@@ -44,7 +44,7 @@ const projects=[
         githubUrl:''
     },{
         id:7,
-        title:'Counter',
+        title:'Css Generator',
         to:'page/css-generator/index.html',
         image:'assets/images/generator.jpg',
         githubUrl:''
