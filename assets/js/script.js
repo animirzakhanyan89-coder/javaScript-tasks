@@ -22,7 +22,7 @@ const projects=[
         id:4,
         title:'Employees Dashboard',
         to:'page/Employees/index.html',
-        image:'assets/images/generator.jpg',
+        image:'assets/images/worker.jpg',
         githubUrl:''
     },{
         id:5,

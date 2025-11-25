@@ -19,3 +19,8 @@ body{ background: var(--soft-bg); }
 .form-select, .form-control{ border-radius:.6rem }
 .modal .badge{ font-size:.85rem }
 .empty-state{ color:#6c757d }
+.projects{
+    img{
+        object-fit: cover;
+    }
+}
