@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Memory Game</title>
+    <style>
+        body {
+            background: #ececec;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        #board {
+            width: 420px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .card {
+            width: 90px;
+            height: 90px;
+            background: #1d3557;
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.3s;
+            transform-style: preserve-3d;
+        }
+
+        .flipped {
+            background: #e63946 !important;
+            transform: rotateY(180deg);
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #2a9d8f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>Memory Cards Game</h2>
+<p>Moves: <span id="moves">0</span></p>
+
+<div id="board">
+<!--    <div class="card flipped" data-value="D" data-index="0"></div>-->
+<!--    <div class="card flipped" data-value="A" data-index="1"></div>-->
+<!--    <div class="card flipped" data-value="A" data-index="2"></div>-->
+<!--    <div class="card flipped" data-value="B" data-index="3"></div>-->
+<!--    <div class="card flipped" data-value="D" data-index="4"></div>-->
+<!--    <div class="card flipped" data-value="C" data-index="5"></div>-->
+<!--    <div class="card flipped" data-value="B" data-index="6"></div>-->
+<!--    <div class="card flipped" data-value="C" data-index="7"></div>-->
+</div>
+
+<button id="restart">Restart</button>
+
+
+<script src="script.js"></script>
+</body>
+</html>

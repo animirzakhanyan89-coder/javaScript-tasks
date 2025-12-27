@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <title>Sales Tax Calculator Pro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        :root{
+            --bg1:#f7d9e9;
+            --bg2:#cfd9ff;
+            --card-bg:rgba(255,255,255,.9);
+            --accent:#6366f1;
+            --accent-soft:rgba(99,102,241,0.12);
+        }
+        *{
+            box-sizing:border-box;
+            font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+        }
+        body{
+            min-height:100vh;
+            margin:0;
+            display:flex;
+            align-items:flex-start;
+            justify-content:center;
+            padding:40px 10px;
+            background:radial-gradient(circle at 0 0,var(--bg1),transparent 55%),
+            radial-gradient(circle at 100% 100%,var(--bg2),#f3f4ff 60%);
+        }
+        .app-shell{
+            width:100%;
+            max-width:900px;
+        }
+        .glass-card{
+            background:var(--card-bg);
+            border-radius:20px;
+            box-shadow:0 18px 45px rgba(15,23,42,.25);
+            border:1px solid rgba(148,163,184,.35);
+            backdrop-filter:blur(14px);
+            padding:22px 26px 26px;
+        }
+        .app-title{
+            font-weight:700;
+            font-size:1.8rem;
+            letter-spacing:.03em;
+        }
+        .badge-accent{
+            background:var(--accent-soft);
+            color:var(--accent);
+            border-radius:999px;
+            padding:3px 12px;
+            font-size:.75rem;
+            font-weight:600;
+        }
+        .field-label{
+            font-size:.85rem;
+            font-weight:600;
+            color:#374151;
+        }
+        .input-prefix{
+            background:#f3f4f6;
+            border-right:none;
+        }
+        .input-prefix + .form-control{
+            border-left:none;
+        }
+        .input-prefix,
+        .form-control{
+            height:38px;
+        }
+        .summary-box{
+            background:var(--accent-soft);
+            border-radius:14px;
+            padding:14px 16px;
+            font-size:.9rem;
+        }
+        .summary-label{
+            color:#4b5563;
+        }
+        .summary-value{
+            font-weight:700;
+            color:#111827;
+        }
+        .summary-value.big{
+            font-size:1.3rem;
+        }
+        .btn-main{
+            background:var(--accent);
+            border-color:var(--accent);
+            font-weight:600;
+        }
+        .btn-main:hover{
+            filter:brightness(0.95);
+        }
+        .orders-title{
+            font-size:1.05rem;
+            font-weight:600;
+        }
+        .table-sm td,
+        .table-sm th{
+            padding:.4rem .45rem;
+            vertical-align:middle;
+        }
+        .empty-hint{
+            font-size:.85rem;
+            color:#6b7280;
+        }
+        @media (max-width: 768px){
+            .glass-card{
+                padding:18px 18px 20px;
+            }
+        }
+    </style>
+
+</head>
+<body>
+<div class="app-shell">
+    <div class="glass-card mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>
+                <h1 class="app-title mb-0">Sales Tax Calculator</h1>
+                <div class="text-muted" style="font-size:.85rem;">Արագ հաշվում, history և CSV ներբեռնում ✨</div>
+            </div>
+            <span class="badge-accent d-none d-md-inline">Demo for students</span>
+        </div>
+
+        <hr class="mb-3">
+
+        <div class="row g-3">
+            <!-- LEFT SIDE: INPUTS -->
+            <div class="col-md-6">
+                <div class="mb-2">
+                    <label for="productName" class="field-label mb-1">Product name (ոչ պարտադիր)</label>
+                    <input id="productName" class="form-control form-control-sm" placeholder="მაგ․ Laptop, Mouse ...">
+                </div>
+
+                <div class="mb-2">
+                    <label class="field-label mb-1">Product price</label>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text input-prefix">$</span>
+                        <input id="productPrice" type="number" step="0.01" class="form-control" placeholder="0.00" value="154">
+                    </div>
+                </div>
+
+                <div class="mb-2">
+                    <label class="field-label mb-1">Quantity</label>
+                    <input id="quantity" type="number" min="1" class="form-control form-control-sm" value="3">
+                </div>
+
+                <div class="mb-2">
+                    <label class="field-label mb-1">Tax rate (%)</label>
+                    <div class="input-group input-group-sm">
+                        <input id="taxRate" type="number" class="form-control" value="3" step="0.1">
+                        <span class="input-group-text">%</span>
+                    </div>
+                    <div class="form-text" style="font-size:.75rem;">Օրինակ․ 3, 5, 20 և այլն</div>
+                </div>
+
+                <div class="d-flex gap-2 mt-3">
+                    <button id="btnCalculate" class="btn btn-main btn-sm flex-grow-1">
+                        Calculate
+                    </button>
+                    <button id="btnAddToList" class="btn btn-outline-secondary btn-sm flex-grow-1">
+                        Add to list
+                    </button>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE: LIVE SUMMARY -->
+            <div class="col-md-6">
+                <div class="summary-box mb-2">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span class="summary-label">Subtotal</span>
+                        <span id="summarySubtotal" class="summary-value">$0</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-1">
+                        <span class="summary-label">Tax (<span id="summaryTaxRate">0</span>%)</span>
+                        <span id="summaryTax" class="summary-value">$0</span>
+                    </div>
+                    <hr class="my-2">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="summary-label">Total</span>
+                        <span id="summaryTotal" class="summary-value big">$0</span>
+                    </div>
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-6">
+                        <button id="btnClearInputs" class="btn btn-outline-secondary btn-sm w-100">
+                            Clear inputs
+                        </button>
+                    </div>
+                    <div class="col-6">
+                        <button id="btnResetAll" class="btn btn-outline-danger btn-sm w-100">
+                            Clear history
+                        </button>
+                    </div>
+                    <div class="col-12 mt-1">
+                        <button id="btnDownloadCSV" class="btn btn-outline-dark btn-sm w-100">
+                            Download CSV of list
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ORDERS LIST -->
+    <div class="glass-card">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <span class="orders-title">Orders list</span>
+            <span class="text-muted" style="font-size:.8rem;">Ամեն "Add to list"-ից հետո order-ը կավելանա այստեղ</span>
+        </div>
+
+        <div id="ordersEmpty" class="empty-hint d-none">
+            Պատմություն դեռ չունես 😊 Սկսի հաշվարկել և սեղմի <strong>Add to list</strong>։
+        </div>
+
+        <div class="table-responsive" id="ordersTableWrapper">
+            <table class="table table-sm table-striped align-middle mb-0">
+                <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>Tax %</th>
+                    <th>Subtotal</th>
+                    <th>Tax</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody id="ordersBody">
+<!--                <tr>-->
+<!--                    <td>1</td>-->
+<!--                    <td>laptop</td>-->
+<!--                    <td>$2000.00</td>-->
+<!--                    <td>3</td>-->
+<!--                    <td>10.5%</td>-->
+<!--                    <td>$6000.00</td>-->
+<!--                    <td>$630.00</td>-->
+<!--                    <td><strong>$6630.00</strong></td>-->
+<!--                    <td class="text-end">-->
+<!--                        <button class="btn btn-sm btn-link text-danger p-0" data-id="1765985915445">-->
+<!--                            ✕-->
+<!--                        </button>-->
+<!--                    </td>-->
+<!--                </tr>-->
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
